@@ -124,6 +124,18 @@
                         </a>
                     </li>
                 @endcan
+                @can('documento_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.documentos.index") }}" class="nav-link {{ request()->is("admin/documentos") || request()->is("admin/documentos/*") ? "active" : "" }}">
+                            <i class="fa-fw nav-icon fas fa-book">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.documento.title') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')
                         <li class="nav-item">
