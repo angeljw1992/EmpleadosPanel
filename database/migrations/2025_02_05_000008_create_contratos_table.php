@@ -14,7 +14,6 @@ class CreateContratosTable extends Migration
             $table->date('contratohasta');
             $table->string('contratoestado');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 }

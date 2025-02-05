@@ -41,9 +41,20 @@ class StoreEmpleadoRequest extends FormRequest
                 'required',
                 'unique:empleados',
             ],
+            'direccion' => [
+                'string',
+                'required',
+            ],
+            'correo' => [
+                'required',
+            ],
             'unidad_de_negocio_id' => [
                 'required',
                 'integer',
+            ],
+            'fecha_nacimiento' => [
+                'required',
+                'date_format:' . config('panel.date_format'),
             ],
         ];
     }

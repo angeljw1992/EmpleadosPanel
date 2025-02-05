@@ -11,14 +11,6 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="id_employee">{{ trans('cruds.empleado.fields.id_employee') }}</label>
-                <input class="form-control {{ $errors->has('id_employee') ? 'is-invalid' : '' }}" type="number" name="id_employee" id="id_employee" value="{{ old('id_employee', $empleado->id_employee) }}" step="1" required>
-                @if($errors->has('id_employee'))
-                    <span class="text-danger">{{ $errors->first('id_employee') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.empleado.fields.id_employee_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="first_name">{{ trans('cruds.empleado.fields.first_name') }}</label>
                 <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" id="first_name" value="{{ old('first_name', $empleado->first_name) }}" required>
                 @if($errors->has('first_name'))
@@ -35,14 +27,6 @@
                 <span class="help-block">{{ trans('cruds.empleado.fields.last_names_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="cedula">{{ trans('cruds.empleado.fields.cedula') }}</label>
-                <input class="form-control {{ $errors->has('cedula') ? 'is-invalid' : '' }}" type="text" name="cedula" id="cedula" value="{{ old('cedula', $empleado->cedula) }}" required>
-                @if($errors->has('cedula'))
-                    <span class="text-danger">{{ $errors->first('cedula') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.empleado.fields.cedula_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="profilepic">{{ trans('cruds.empleado.fields.profilepic') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('profilepic') ? 'is-invalid' : '' }}" id="profilepic-dropzone">
                 </div>
@@ -50,6 +34,22 @@
                     <span class="text-danger">{{ $errors->first('profilepic') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.empleado.fields.profilepic_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="direccion">{{ trans('cruds.empleado.fields.direccion') }}</label>
+                <input class="form-control {{ $errors->has('direccion') ? 'is-invalid' : '' }}" type="text" name="direccion" id="direccion" value="{{ old('direccion', $empleado->direccion) }}" required>
+                @if($errors->has('direccion'))
+                    <span class="text-danger">{{ $errors->first('direccion') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.empleado.fields.direccion_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="correo">{{ trans('cruds.empleado.fields.correo') }}</label>
+                <input class="form-control {{ $errors->has('correo') ? 'is-invalid' : '' }}" type="email" name="correo" id="correo" value="{{ old('correo', $empleado->correo) }}" required>
+                @if($errors->has('correo'))
+                    <span class="text-danger">{{ $errors->first('correo') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.empleado.fields.correo_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="unidad_de_negocio_id">{{ trans('cruds.empleado.fields.unidad_de_negocio') }}</label>
@@ -74,6 +74,14 @@
                     <span class="text-danger">{{ $errors->first('contrato_desde') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.empleado.fields.contrato_desde_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="fecha_nacimiento">{{ trans('cruds.empleado.fields.fecha_nacimiento') }}</label>
+                <input class="form-control date {{ $errors->has('fecha_nacimiento') ? 'is-invalid' : '' }}" type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $empleado->fecha_nacimiento) }}" required>
+                @if($errors->has('fecha_nacimiento'))
+                    <span class="text-danger">{{ $errors->first('fecha_nacimiento') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.empleado.fields.fecha_nacimiento_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

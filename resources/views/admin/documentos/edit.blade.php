@@ -32,6 +32,14 @@
                 <span class="help-block">{{ trans('cruds.documento.fields.carne_verde_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="fecha_vencimiento_verde">{{ trans('cruds.documento.fields.fecha_vencimiento_verde') }}</label>
+                <input class="form-control date {{ $errors->has('fecha_vencimiento_verde') ? 'is-invalid' : '' }}" type="text" name="fecha_vencimiento_verde" id="fecha_vencimiento_verde" value="{{ old('fecha_vencimiento_verde', $documento->fecha_vencimiento_verde) }}">
+                @if($errors->has('fecha_vencimiento_verde'))
+                    <span class="text-danger">{{ $errors->first('fecha_vencimiento_verde') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.documento.fields.fecha_vencimiento_verde_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="carne_blanco">{{ trans('cruds.documento.fields.carne_blanco') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('carne_blanco') ? 'is-invalid' : '' }}" id="carne_blanco-dropzone">
                 </div>
@@ -39,6 +47,14 @@
                     <span class="text-danger">{{ $errors->first('carne_blanco') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.documento.fields.carne_blanco_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="fecha_vencimiento_blanco">{{ trans('cruds.documento.fields.fecha_vencimiento_blanco') }}</label>
+                <input class="form-control date {{ $errors->has('fecha_vencimiento_blanco') ? 'is-invalid' : '' }}" type="text" name="fecha_vencimiento_blanco" id="fecha_vencimiento_blanco" value="{{ old('fecha_vencimiento_blanco', $documento->fecha_vencimiento_blanco) }}">
+                @if($errors->has('fecha_vencimiento_blanco'))
+                    <span class="text-danger">{{ $errors->first('fecha_vencimiento_blanco') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.documento.fields.fecha_vencimiento_blanco_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

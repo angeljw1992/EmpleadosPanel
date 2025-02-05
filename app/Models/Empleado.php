@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,12 +21,6 @@ class Empleado extends Model implements HasMedia
         'profilepic',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
     public static $searchable = [
         'id_employee',
         'first_name',
@@ -33,13 +28,23 @@ class Empleado extends Model implements HasMedia
         'cedula',
     ];
 
+    protected $dates = [
+        'fecha_nacimiento',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected $fillable = [
         'id_employee',
         'first_name',
         'last_names',
         'cedula',
+        'direccion',
+        'correo',
         'unidad_de_negocio_id',
         'contrato_desde_id',
+        'fecha_nacimiento',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -86,5 +91,15 @@ class Empleado extends Model implements HasMedia
     public function contrato_desde()
     {
         return $this->belongsTo(Contrato::class, 'contrato_desde_id');
+    }
+
+    public function getFechaNacimientoAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setFechaNacimientoAttribute($value)
+    {
+        $this->attributes['fecha_nacimiento'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 }

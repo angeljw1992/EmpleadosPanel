@@ -34,9 +34,6 @@
                                 {{ trans('cruds.empleado.fields.cedula') }}
                             </th>
                             <th>
-                                {{ trans('cruds.empleado.fields.profilepic') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.empleado.fields.unidad_de_negocio') }}
                             </th>
                             <th>
@@ -70,13 +67,6 @@
                                 </td>
                                 <td>
                                     {{ $empleado->cedula ?? '' }}
-                                </td>
-                                <td>
-                                    @if($empleado->profilepic)
-                                        <a href="{{ $empleado->profilepic->getUrl() }}" target="_blank" style="display: inline-block">
-                                            <img src="{{ $empleado->profilepic->getUrl('thumb') }}">
-                                        </a>
-                                    @endif
                                 </td>
                                 <td>
                                     {{ $empleado->unidad_de_negocio->businessname ?? '' }}
