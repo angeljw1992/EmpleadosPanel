@@ -39,7 +39,7 @@ class Empleado extends Model implements HasMedia
         'last_names',
         'cedula',
         'unidad_de_negocio_id',
-        'prueba_contrato_id',
+        'contrato_desde_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -61,6 +61,11 @@ class Empleado extends Model implements HasMedia
         return $this->hasMany(Contrato::class, 'contrato_id', 'id');
     }
 
+    public function empleadoDocumentos()
+    {
+        return $this->hasMany(Documento::class, 'empleado_id', 'id');
+    }
+
     public function getProfilepicAttribute()
     {
         $file = $this->getMedia('profilepic')->last();
@@ -78,8 +83,8 @@ class Empleado extends Model implements HasMedia
         return $this->belongsTo(Empresa::class, 'unidad_de_negocio_id');
     }
 
-    public function prueba_contrato()
+    public function contrato_desde()
     {
-        return $this->belongsTo(Contrato::class, 'prueba_contrato_id');
+        return $this->belongsTo(Contrato::class, 'contrato_desde_id');
     }
 }

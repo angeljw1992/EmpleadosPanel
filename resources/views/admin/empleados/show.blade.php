@@ -69,10 +69,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.empleado.fields.prueba_contrato') }}
+                            {{ trans('cruds.empleado.fields.contrato_desde') }}
                         </th>
                         <td>
-                            {{ $empleado->prueba_contrato->contratodesde ?? '' }}
+                            {{ $empleado->contrato_desde->contratodesde ?? '' }}
                         </td>
                     </tr>
                 </tbody>
@@ -96,10 +96,18 @@
                 {{ trans('cruds.contrato.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#empleado_documentos" role="tab" data-toggle="tab">
+                {{ trans('cruds.documento.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="contrato_contratos">
             @includeIf('admin.empleados.relationships.contratoContratos', ['contratos' => $empleado->contratoContratos])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="empleado_documentos">
+            @includeIf('admin.empleados.relationships.empleadoDocumentos', ['documentos' => $empleado->empleadoDocumentos])
         </div>
     </div>
 </div>
