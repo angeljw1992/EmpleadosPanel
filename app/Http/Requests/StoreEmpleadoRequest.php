@@ -45,10 +45,6 @@ class StoreEmpleadoRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'prueba_contrato_id' => [
-                'required',
-                'integer',
-            ],
         ];
     }
 }

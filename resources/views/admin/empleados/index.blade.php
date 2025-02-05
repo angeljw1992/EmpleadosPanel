@@ -45,7 +45,10 @@
                             {{ trans('cruds.empleado.fields.unidad_de_negocio') }}
                         </th>
                         <th>
-                            {{ trans('cruds.empleado.fields.prueba_contrato') }}
+                            {{ trans('cruds.empleado.fields.contrato_desde') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.contrato.fields.contratohasta') }}
                         </th>
                         <th>
                             {{ trans('cruds.contrato.fields.contratoestado') }}
@@ -84,11 +87,14 @@
                                 {{ $empleado->unidad_de_negocio->businessname ?? '' }}
                             </td>
                             <td>
-                                {{ $empleado->prueba_contrato->contratodesde ?? '' }}
+                                {{ $empleado->contrato_desde->contratodesde ?? '' }}
                             </td>
                             <td>
-                                @if($empleado->prueba_contrato)
-                                    {{ $empleado->prueba_contrato::CONTRATOESTADO_SELECT[$empleado->prueba_contrato->contratoestado] ?? '' }}
+                                {{ $empleado->contrato_desde->contratohasta ?? '' }}
+                            </td>
+                            <td>
+                                @if($empleado->contrato_desde)
+                                    {{ $empleado->contrato_desde::CONTRATOESTADO_SELECT[$empleado->contrato_desde->contratoestado] ?? '' }}
                                 @endif
                             </td>
                             <td>
