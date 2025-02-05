@@ -24,7 +24,7 @@ class EmpleadosController extends Controller
     {
         abort_if(Gate::denies('empleado_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $empleados = Empleado::with(['unidad_de_negocio', 'prueba_contrato', 'media'])->get();
+        $empleados = Empleado::with(['unidad_de_negocio', 'contrato_desde', 'media'])->get();
 
         return view('admin.empleados.index', compact('empleados'));
     }
@@ -35,9 +35,9 @@ class EmpleadosController extends Controller
 
         $unidad_de_negocios = Empresa::pluck('businessname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $prueba_contratos = Contrato::pluck('contratodesde', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $contrato_desdes = Contrato::pluck('contratodesde', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.empleados.create', compact('prueba_contratos', 'unidad_de_negocios'));
+        return view('admin.empleados.create', compact('contrato_desdes', 'unidad_de_negocios'));
     }
 
     public function store(StoreEmpleadoRequest $request)
@@ -61,11 +61,11 @@ class EmpleadosController extends Controller
 
         $unidad_de_negocios = Empresa::pluck('businessname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $prueba_contratos = Contrato::pluck('contratodesde', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $contrato_desdes = Contrato::pluck('contratodesde', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $empleado->load('unidad_de_negocio', 'prueba_contrato');
+        $empleado->load('unidad_de_negocio', 'contrato_desde');
 
-        return view('admin.empleados.edit', compact('empleado', 'prueba_contratos', 'unidad_de_negocios'));
+        return view('admin.empleados.edit', compact('contrato_desdes', 'empleado', 'unidad_de_negocios'));
     }
 
     public function update(UpdateEmpleadoRequest $request, Empleado $empleado)
@@ -90,7 +90,7 @@ class EmpleadosController extends Controller
     {
         abort_if(Gate::denies('empleado_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $empleado->load('unidad_de_negocio', 'prueba_contrato', 'contratoContratos');
+        $empleado->load('unidad_de_negocio', 'contrato_desde', 'contratoContratos', 'empleadoDocumentos');
 
         return view('admin.empleados.show', compact('empleado'));
     }

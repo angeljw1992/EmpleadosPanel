@@ -1,49 +1,40 @@
 <div class="m-3">
-    @can('empleado_create')
+    @can('documento_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.empleados.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.empleado.title_singular') }}
+                <a class="btn btn-success" href="{{ route('admin.documentos.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.documento.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.empleado.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.documento.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-unidadDeNegocioEmpleados">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-empleadoDocumentos">
                     <thead>
                         <tr>
                             <th width="10">
 
                             </th>
                             <th>
-                                {{ trans('cruds.empleado.fields.id_employee') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.empleado.fields.first_name') }}
+                                {{ trans('cruds.documento.fields.empleado') }}
                             </th>
                             <th>
                                 {{ trans('cruds.empleado.fields.last_names') }}
                             </th>
                             <th>
-                                {{ trans('cruds.empleado.fields.cedula') }}
+                                {{ trans('cruds.empleado.fields.id_employee') }}
                             </th>
                             <th>
-                                {{ trans('cruds.empleado.fields.unidad_de_negocio') }}
+                                {{ trans('cruds.documento.fields.carne_verde') }}
                             </th>
                             <th>
-                                {{ trans('cruds.empleado.fields.contrato_desde') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.contrato.fields.contratohasta') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.contrato.fields.contratoestado') }}
+                                {{ trans('cruds.documento.fields.carne_blanco') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -51,52 +42,49 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($empleados as $key => $empleado)
-                            <tr data-entry-id="{{ $empleado->id }}">
+                        @foreach($documentos as $key => $documento)
+                            <tr data-entry-id="{{ $documento->id }}">
                                 <td>
 
                                 </td>
                                 <td>
-                                    {{ $empleado->id_employee ?? '' }}
+                                    {{ $documento->empleado->first_name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $empleado->first_name ?? '' }}
+                                    {{ $documento->empleado->last_names ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $empleado->last_names ?? '' }}
+                                    {{ $documento->empleado->id_employee ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $empleado->cedula ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $empleado->unidad_de_negocio->businessname ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $empleado->contrato_desde->contratodesde ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $empleado->contrato_desde->contratohasta ?? '' }}
-                                </td>
-                                <td>
-                                    @if($empleado->contrato_desde)
-                                        {{ $empleado->contrato_desde::CONTRATOESTADO_SELECT[$empleado->contrato_desde->contratoestado] ?? '' }}
+                                    @if($documento->carne_verde)
+                                        <a href="{{ $documento->carne_verde->getUrl() }}" target="_blank">
+                                            {{ trans('global.view_file') }}
+                                        </a>
                                     @endif
                                 </td>
                                 <td>
-                                    @can('empleado_show')
-                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.empleados.show', $empleado->id) }}">
+                                    @if($documento->carne_blanco)
+                                        <a href="{{ $documento->carne_blanco->getUrl() }}" target="_blank">
+                                            {{ trans('global.view_file') }}
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @can('documento_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.documentos.show', $documento->id) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
 
-                                    @can('empleado_edit')
-                                        <a class="btn btn-xs btn-info" href="{{ route('admin.empleados.edit', $empleado->id) }}">
+                                    @can('documento_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.documentos.edit', $documento->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
 
-                                    @can('empleado_delete')
-                                        <form action="{{ route('admin.empleados.destroy', $empleado->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    @can('documento_delete')
+                                        <form action="{{ route('admin.documentos.destroy', $documento->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -118,11 +106,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('empleado_delete')
+@can('documento_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.empleados.massDestroy') }}",
+    url: "{{ route('admin.documentos.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -150,10 +138,10 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 2, 'desc' ]],
+    order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-unidadDeNegocioEmpleados:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-empleadoDocumentos:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

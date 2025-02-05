@@ -46,6 +46,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('contratos/destroy', 'ContratosController@massDestroy')->name('contratos.massDestroy');
     Route::resource('contratos', 'ContratosController');
 
+    // Documentos
+    Route::delete('documentos/destroy', 'DocumentosController@massDestroy')->name('documentos.massDestroy');
+    Route::post('documentos/media', 'DocumentosController@storeMedia')->name('documentos.storeMedia');
+    Route::post('documentos/ckmedia', 'DocumentosController@storeCKEditorImages')->name('documentos.storeCKEditorImages');
+    Route::resource('documentos', 'DocumentosController');
+
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

@@ -144,6 +144,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 34,
+                'title' => 'documento_create',
+            ],
+            [
+                'id'    => 35,
+                'title' => 'documento_edit',
+            ],
+            [
+                'id'    => 36,
+                'title' => 'documento_show',
+            ],
+            [
+                'id'    => 37,
+                'title' => 'documento_delete',
+            ],
+            [
+                'id'    => 38,
+                'title' => 'documento_access',
+            ],
+            [
+                'id'    => 39,
                 'title' => 'profile_password_edit',
             ],
         ];
