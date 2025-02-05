@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Documento extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use InteractsWithMedia, HasFactory;
 
     public $table = 'documentos';
 
@@ -22,6 +22,8 @@ class Documento extends Model implements HasMedia
     ];
 
     protected $dates = [
+        'fecha_vencimiento_verde',
+        'fecha_vencimiento_blanco',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -29,6 +31,8 @@ class Documento extends Model implements HasMedia
 
     protected $fillable = [
         'empleado_id',
+        'fecha_vencimiento_verde',
+        'fecha_vencimiento_blanco',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -55,8 +59,28 @@ class Documento extends Model implements HasMedia
         return $this->getMedia('carne_verde')->last();
     }
 
+    public function getFechaVencimientoVerdeAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setFechaVencimientoVerdeAttribute($value)
+    {
+        $this->attributes['fecha_vencimiento_verde'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
     public function getCarneBlancoAttribute()
     {
         return $this->getMedia('carne_blanco')->last();
+    }
+
+    public function getFechaVencimientoBlancoAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setFechaVencimientoBlancoAttribute($value)
+    {
+        $this->attributes['fecha_vencimiento_blanco'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 }

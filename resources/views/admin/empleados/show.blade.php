@@ -61,6 +61,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.empleado.fields.direccion') }}
+                        </th>
+                        <td>
+                            {{ $empleado->direccion }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.empleado.fields.correo') }}
+                        </th>
+                        <td>
+                            {{ $empleado->correo }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.empleado.fields.unidad_de_negocio') }}
                         </th>
                         <td>
@@ -73,6 +89,14 @@
                         </th>
                         <td>
                             {{ $empleado->contrato_desde->contratodesde ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.empleado.fields.fecha_nacimiento') }}
+                        </th>
+                        <td>
+                            {{ $empleado->fecha_nacimiento }}
                         </td>
                     </tr>
                 </tbody>

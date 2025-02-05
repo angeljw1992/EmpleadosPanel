@@ -21,6 +21,14 @@ class StoreDocumentoRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'fecha_vencimiento_verde' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
+            'fecha_vencimiento_blanco' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
         ];
     }
 }

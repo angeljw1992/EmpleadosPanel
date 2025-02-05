@@ -14,6 +14,9 @@ class CreateEmpleadosTable extends Migration
             $table->string('first_name');
             $table->string('last_names');
             $table->string('cedula')->unique();
+            $table->string('direccion');
+            $table->string('correo');
+            $table->date('fecha_nacimiento');
             $table->timestamps();
         });
     }

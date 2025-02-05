@@ -45,6 +45,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.documento.fields.fecha_vencimiento_verde') }}
+                        </th>
+                        <td>
+                            {{ $documento->fecha_vencimiento_verde }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.documento.fields.carne_blanco') }}
                         </th>
                         <td>
@@ -53,6 +61,14 @@
                                     {{ trans('global.view_file') }}
                                 </a>
                             @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.documento.fields.fecha_vencimiento_blanco') }}
+                        </th>
+                        <td>
+                            {{ $documento->fecha_vencimiento_blanco }}
                         </td>
                     </tr>
                 </tbody>
